@@ -3,21 +3,26 @@
     width: 100%;
 }
 
+header .header-intro {
+    background-color: rgb(0, 0, 0);
+    width: 100%;
+    vertical-align: middle;
+    text-align: center;
+    padding: 10px 0 0 0;
+}
+
+header nav {
+    margin-top: 20px;
+}
+
 header .header-banner {
-    background-image: url("img/sunrise.jpg");
+    background-image: url("img/chefCooking.jpg");
     width: 100%;
     height: calc(100vh - 500px);
     background-repeat: no-repeat;
     background-position: center;
     background-size: cover;  
     display: table;
-}
-
-header .logo {
-    display: table-cell;
-    vertical-align: middle;
-    text-align: center;
-    padding: 10px 0 20px 0;
 }
 
 header h1 {
@@ -57,7 +62,7 @@ nav ul li a {
     font-weight: 400;
     font-size: 18px;
     letter-spacing: 3px;
-    color: #172029;
+    color: #ffffff;
     text-transform: uppercase;
     text-decoration: none;
 }
@@ -67,7 +72,7 @@ footer {
     height: 130px;
     padding: 40px 40px;
     background-color: #172029;
-    margin-top: 20px;
+    margin-top: 0;
 }
 
 .disclaimer {
@@ -204,5 +209,10 @@ hr {
     
     .disclaimer span {
         font-style: italic;
+    }
+
+    header nav {
+        margin-top: 40px;
+        padding-bottom: 20px;
     }
 }
