@@ -75,6 +75,7 @@ nav ul li a {
 
 main {
     background-color: #000000;
+    padding-bottom: 40px;
 }
 
 main section {
@@ -188,19 +189,34 @@ hr {
     } 
     .post-header {       
     /*kujundus*/
+    /* display: none; */
+    opacity: 0;
+    transition: opacity .6s ease-in-out;
+    -moz-transition: opacity .6s ease-in-out;
+    -webkit-transition: opacity .6s ease-in-out;
     font-family: "Open Sans", sans-serif;
     font-weight: 700;
     font-size: 22px;
     letter-spacing: 3px;
-    line-height: 24px;
+    line-height: 40px;
     color: #ffffff;
     text-transform: uppercase;
-    text-shadow: 3px 3px 9px #111111;
+    text-shadow: 3px 3px 8px #111111;
        /*positsioneerimine*/
     position: absolute;
+    text-align: center;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
+}
+
+.gallery-image:hover {
+    .post-header {
+        opacity: 1;
+        transition: opacity .6s ease-in-out;
+        -moz-transition: opacity .6s ease-in-out;
+        -webkit-transition: opacity .6s ease-in-out;
+    }
 }
 
 .gallery-links {
@@ -251,11 +267,10 @@ hr {
         float: left;
     }
     .recipes {
-        display: none;
+        display: none; 
     }
-    /* .about-us-pic {
-    } */
 }
+
 @media only screen and (min-width: 1600px) {
     .about-us-pic {
         background-position-y: -60px;
