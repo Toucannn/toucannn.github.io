@@ -18,7 +18,8 @@ header .header-intro {
 }
 
 header nav {
-    margin-top: 20px;
+    padding-top: 10px;
+    padding-bottom: 10px;
 }
 
 header .header-banner {
@@ -34,7 +35,7 @@ header .header-banner {
 header h1 {
     font-family: "Gentium Plus", serif;
     font-weight: 700;
-    font-style: italic;
+    /* font-style: italic; */
     font-size: 60px;
     color: #ffffff;
     line-height: 70px;
@@ -45,8 +46,10 @@ header h1 {
 header h2 {    
     font-family: "Open Sans", sans-serif;
     font-weight: 300;
+    font-style: italic;
     font-size: 15px;
-    letter-spacing: 5px;
+    letter-spacing: 3px;
+    word-spacing: 5px;
     color: #ffffff;
     text-transform: uppercase;
 }
@@ -241,9 +244,9 @@ hr {
     }  
     header h2 {
         font-size: 24px;
-        margin-top: 20px;
     }
     header nav ul li {
+        width: 35vw;
         padding: 16px 42px;
     }
     .about-us {
@@ -269,34 +272,13 @@ hr {
     .recipes {
         display: none; 
     }
+    .hide {
+        display: none;
+    }
 }
 
 @media only screen and (min-width: 1600px) {
     .about-us-pic {
         background-position-y: -60px;
-    }
-}
-
-@media only screen and (min-width: 950px) {
-    .disclaimer {
-        display: block;
-        font-family: "Open Sans", sans-serif;
-        font-weight: 300;
-        font-size: 18px;
-        letter-spacing: 2px;
-        line-height: 24px;
-        color: #ffffff;
-        text-transform: uppercase;
-        float: left;
-        margin: 0 80px;
-    }
-    
-    .disclaimer span {
-        font-style: italic;
-    }
-
-    header nav {
-        margin-top: 40px;
-        padding-bottom: 20px;
     }
 }
