@@ -65,3 +65,11 @@ footer {
 section form div {
     width: 45%;
 }
+
+.meist {
+    text-align: justify;
+}
+
+.carousel-inner {
+    height: 300px;
+}
