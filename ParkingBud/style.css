@@ -1,0 +1,246 @@
+body {
+    margin: 0px;
+}
+
+.welcome {
+    width: 100%;
+    display: block;
+}
+
+.tere {
+    color: #f3f4f6;
+    height: 40px !important;
+    font-size: 50px;
+    margin-top: 20px !important;
+}
+
+.logo {
+    height: 350px;
+    width: 100%;
+    background-color: #639cd7;
+
+  }
+  .logo a img{   
+    display: block; 
+    margin-left: auto;
+    margin-right: auto;
+    padding-top: 30px;
+}
+
+.logo2 {
+    height: 300px;
+    width: 100%;
+    background-color: #639cd7;
+
+  }
+  .logo2 a img{   
+    display: block; 
+    margin-left: auto;
+    margin-right: auto;
+    padding-top: 30px;
+}
+
+header nav ul {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    align-items: center;
+    list-style: none;   
+    
+}
+
+header nav ul li {
+    display: inline-block;
+    padding: 16px 16px 0 0;
+    padding-top: 40px;
+    }
+
+nav ul li a {
+font-weight: bold;
+    font-size: 18px;
+    letter-spacing: 1px;
+    color: #f3f4f6;
+    text-transform: uppercase;
+    text-decoration: none;
+    
+    }    
+
+ul {
+    margin-block-start: 0px;
+    padding-inline-start: 0px;
+}
+
+main {
+    border: 2px solid #639cd7;
+    margin-top: 1px;
+    margin-bottom: 1px;;
+}    
+.hetkeinfo img{
+    display: block; 
+    margin-left: auto;
+    margin-right: auto;
+    padding: 15px;
+    width: 75%;
+}
+
+ h1 {
+    text-transform: uppercase;
+    color: #3d78b4;
+    text-align: center;
+    margin-top: 60px;
+    margin-bottom: 15px;;
+ }
+
+ .kontakt {
+    height: 100px;
+    width: 100%;
+    background-color: #639cd7;
+    color: #f3f4f6;
+    text-align: center;
+    font-weight: bold;
+    padding-top: 50px;
+
+  }
+.tingimused p, .parkimise_reg p{
+    text-align: center;
+    font-weight: bold;
+    color: #3d78b4;
+    padding-left: 15%;
+    padding-right: 15%;
+    line-height: 1.6;
+}
+.button_position {
+    text-align: center;  
+    display: block; 
+    margin-left: auto;
+    margin-right: auto;
+    padding: 15px;
+    width: 75%;
+
+}
+.button {
+    background-color: #3d78b4; 
+    border: none;
+    color: white;
+    padding: 12px 32px;
+    text-align: center;
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 16px;
+    margin-bottom: 40px;
+    height: 50px;
+
+  }
+h2 {
+    text-transform: uppercase;
+    font-size: 18px;
+}
+.asukoht {
+      display: flex;
+      flex-flow: row;
+      justify-content: space-between;
+      list-style: none;
+      padding-left: 5%;
+      padding-right: 5%;
+      padding-bottom: 3%;
+      padding-top: 3%;
+      color: #3d78b4;
+      font-weight: bold;
+      border-top: 2px solid #639cd7;
+  }
+.asukoht li a img {
+    float: right;
+    margin-left: 10px;
+}
+
+.tutvustus {
+    width: 70%;
+    padding-right: 40px;
+    text-align: justify;
+}
+
+.asukoht-kaart {
+    width: 30%;
+}
+
+h3 {
+    text-transform: uppercase;
+    font-size: 14px;
+    color: #639cd7;
+}
+
+.parkimise_reg {
+    text-align: center;  
+    display: block; 
+    margin-left: auto;
+    margin-right: auto;
+    color: #3d78b4;
+    font-weight: bold;
+
+}
+
+.leaflet-container {
+    height: 300px;
+    max-width: 100%;
+    max-height: 100%;
+}
+
+.vabad-kohad {
+    display: flex;
+    justify-content: center;
+    height: 50px;
+    padding-top: 10px;
+}
+
+.kohtade-arv {
+    height: 30px;
+    width: 40px;
+    border: 1px solid #639cd7;
+    padding-top: 8px;
+    margin-left: 30px;
+    font-size: 20px;
+}
+
+#reg_number {
+    margin-top: 40px;
+    /* margin-left: 50px; */
+    /* height: 30px; */
+    font-size: 20px;
+    font-weight: bold;
+}
+
+#saabunud {
+    margin-top: 20px;
+    /* margin-left: 50px;
+    height: 30px; */
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.label-saabunud {
+    margin-left: 32px;
+}
+
+.reg_number_input {
+    margin-top: 40px;
+    margin-left: 50px;
+    margin-bottom: 30px;
+    height: 30px;
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.saabunud_input {
+    margin-top: 40px;
+    margin-bottom: 90px;
+    margin-left: 50px;
+    height: 30px;
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.border {
+    border: 2px solid #3d78b4;
+    width: 200px;
+    height: 25px;
+}

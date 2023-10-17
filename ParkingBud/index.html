@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Parking Bud</title>
+        <link rel="stylesheet" href="reset.css">
+        <link rel="stylesheet" href="style.css">
+        <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+        integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY="
+        crossorigin=""/>
+        <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+        integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
+        crossorigin=""></script>
+    </head>
+    <body>
+        <!-- päis --->
+        <header class="logo">
+
+            <a href="index.html"><img src="img/logo.png" ></a>
+            <div class="welcome">
+                <h1 class="tere">Tere tulemast!</h1>
+            </div>
+            <nav>
+                <ul>      
+                <li><a href="index.html">Avaleht</a></li>
+                <li><a href="registreeri.html">Registreeri parkimine</a></li>
+                <li><a href="info.html">Info</a></li>        
+                </ul>                  
+            </nav>
+        </header>
+        <main>
+            <section class="tingimused">
+                <h1>Tingimused kasutajale</h1>   
+                <p> Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque ut augue augue. Vestibulum lobortis
+                    id nibh at varius. Pellentesque in nisl sit amet diam sagittis tincidunt at nec quam. Cras viverra
+                    non magna a volutpat. Aliquam rutrum tincidunt orci in luctus. Integer elementum est nec tellus
+                    sagittis, at eleifend urna varius. Mauris eu nunc lobortis, tempus nisi et, lacinia elit. Phasellus
+                    luctus elementum eros, ut suscipit sem sagittis ut.                    
+                </p>
+               <div class="button_position">
+               <button class="button" type="button">Nõustu ja registreeri parkimine</button>
+                </div>
+            </section>
+            <section class="asukoht">
+                <div class="tutvustus">
+                    <li>
+                        <h2>Asukoht</h2>  
+                        <p> Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque ut augue augue. Vestibulum lobortis
+                            id nibh at varius. Pellentesque in nisl sit amet diam sagittis tincidunt at nec quam. Cras viverra
+                            non magna a volutpat. Aliquam rutrum tincidunt orci in luctus. Integer elementum est nec tellus
+                            sagittis, at eleifend urna varius. Mauris eu nunc lobortis, tempus nisi et, lacinia elit. Phasellus
+                            luctus elementum eros, ut suscipit sem sagittis ut.                    
+                           </p>
+                    </li>
+                </div>
+                <div class="asukoht-kaart">
+                    <div id="map"></div>
+                </div>
+                <!-- <li><a href="#" class="parkla"><img src="img/parkla_asukoht.png" width="300" height="200"
+                                alt="parkla" /></a>
+                </li> -->
+            </section>
+            
+            
+        </main>
+        
+        <footer>
+            <div class="kontakt">
+                <p>Kontaktinfo</p>
+    
+            </div>
+            
+        </footer>
+        <script>
+            const map = L.map('map').setView([58.37831578582495, 26.72799429696167], 17);
+            
+            var marker = L.marker([58.37831578582495, 26.72799429696167]).addTo(map);
+        
+            const tiles = L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                maxZoom: 19,
+                attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+            }).addTo(map);
+        </script>
+
+        <script type='text/javascript' src="script.js"></script>
+        <script type='text/javascript' src='https://www.bing.com/api/maps/mapcontrol?callback=GetMap&key=[AjQvHLUTOza9WmMCo-RVb7S7cFjaAhH6hjeCk9ufJs2LUTJABfu6Ur1zBK_mCjix]' async defer></script>
+    </body>
+</html>
