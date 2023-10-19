@@ -73,7 +73,11 @@
             alert("Palun täitke kõik väljad!")
             document.getElementById('lname').focus()
 
-        } else if (document.getElementById('sm' || "lg" || "gigant").checked == false) {
+        } else if ((
+            document.getElementById('sm').checked || 
+            document.getElementById('lg').checked || 
+            document.getElementById('gigant').checked
+            ) == false) {
             alert("Palun vali paki suurus!")
             // kui suurus valimata, lisan taustavärvi
             document.getElementById('radio').classList.add("highlight");
