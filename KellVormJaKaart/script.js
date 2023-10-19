@@ -74,8 +74,8 @@
             document.getElementById('lname').focus()
 
         } else if ((
-            document.getElementById('sm').checked || 
-            document.getElementById('lg').checked || 
+            document.getElementById('sm').checked && 
+            document.getElementById('lg').checked && 
             document.getElementById('gigant').checked
             ) == false) {
             alert("Palun vali paki suurus!")
