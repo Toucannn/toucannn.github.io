@@ -90,8 +90,6 @@
             
             
         } else {
-            // eemaldan taustavärvi
-            document.getElementById('radio').classList.remove("highlight");
             
             // suurendan tarnesummat vastavalt linnale
             switch(linn.value) {
@@ -110,7 +108,9 @@
             
             // teen tarnesumma nähtavaks
             e.innerHTML = summa + "&euro;";
-        }        
+            // eemaldan taustavärvi
+            document.getElementById('radio').classList.remove("highlight");
+        }
         console.log("Tarne hind on arvutatud");
     }
     
