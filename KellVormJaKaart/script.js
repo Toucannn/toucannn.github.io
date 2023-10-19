@@ -90,6 +90,8 @@
             
             
         } else {
+            // eemaldan taustavärvi
+            document.getElementById('radio').classList.remove("highlight");
             
             // suurendan tarnesummat vastavalt linnale
             switch(linn.value) {
