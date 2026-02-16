@@ -5,7 +5,7 @@
 <body style="display: flex; flex-direction: row; margin: 0">
   <div style="width: 20vw; height: 100vh; background-color: rgb(252, 252, 252); display: flex; flex-direction: column;">
     <button style="margin-left : 50px; margin-right: 50px; margin-bottom: 20px; margin-top: 30px;">
-      <a href="/TartuFlood/map.html">Kaardi vaade</a>
+      <a href="/TartuFlood/map.html" target="_blank">Kaardi vaade</a>
     </button>
 
     <button style="margin-left : 50px; margin-right: 50px; margin-bottom: 20px;">
@@ -21,134 +21,291 @@
     </button>
   </div>
 
-  <div style="width: 60vw; height: max-content; background-color: rgb(233, 239, 241);">
+  <div style="width: 60vw; min-height: 100vh; height: max-content; background-color: rgb(233, 239, 241);">
     <h1>Emajõe üleujutuse modelleerimine Tartus</h1>
 
-    <h3>Sissejuhatus</h3>
+    <!-- Sissejuhatus -->
+    <div class="acc2">
+      <button class="acc2__title" type="button" aria-expanded="false" aria-controls="panel-1">
+        Sissejuhatus
+      </button>
 
-    <p>Selles töötoas modelleerime kaardil Emajõe veetaseme tõusuga kaasnevaid üleujutusi. Emajõe veetase on pidevas muutumises, suuremaid üleujutusi näeb enamasti kevadel. 2025. aastal oli suurem üleujutus veebruaris-märtsis, kui Ihaste luht Emajõe idapoolsel kaldal oli täielikult üle ujutatud, jäätus ja leidis kohalike poolt kasutust uisuplatsina.</p>
-
-    <p>Üleujutuste põhjuseid on mitmeid, mis koosmõjus üksteist võimendavad. Lumerohke talv suure veevaruga lumes annab sulades suure potentsiaali veetaseme tõusuks. Sügavalt läbi külmunud maapind ei võta vett vastu, seega liigub vesi jõge mööda Peipsi suunas. Veetase sõltub veel Peipsi järve veetasemest ja jääoludest: kui veetase on kõrge ja sissevool takistatud, paisub jõgi aina enam üle kallaste.</p>
-
-    <img src="/assets/img/supilinn_20_saj.png" alt="">
-    <p style="padding-left: 10%; font-weight: 600;">Sagedane olukord Tartus, Supilinnas 20. sajandi alguses</p>
-
-    <h3>Töökeskkonna ettevalmistamine</h3>
-
-    <p>Modelleerimiseks kasutame tarkvara QGIS, mis võimaldab meil ruumiandmeid töödelda. Töökeskkonna ettevalmistamiseks tee läbi järgmised sammud:</p>
-
-    <ul>
-      <li>Ava arvutis tarkvara QGIS</li>
-      <li>Loo uus projekt: kliki "New Empty Project" või tööriistaribalt Project → New</li>
-      <li>Salvesta projekt arvutis sellisesse kausta, kust selle hiljem üles leiaksid. Näiteks Documents või Desktop. Project → Save As... → vali failile sobiv nimi ja kaust → Save</li>
-      <li>Lae arvutisse alla andmed <a href="/assets/downloads/andmed.zip" download>siit lingilt</a></li>
-      <li>Ava kaust, kuhu andmed alla laadisid ja lohista kaust andmed.zip QGIS-i aknasse, et et andmed kuvada</li>
-      <li>Avanenud aknas näed, milliseid kihte lisada. Kaks kihti on juba valitud, seega kliki Add Layers</li>
-    </ul>
-
-    <p>Pärast kihtide lisamist peaks QGIS-is näha olema sarnane vaade:</p>
-    <img src="/assets/img/QGIS_andmed_valmis.png">
-
-    <h3>Aluskaardi lisamine</h3>
-
-    <p>Andmed on küll edukalt lisatud, kuid puudub kontekst: me näeme kaardil mingeid kihte, aga me ei tea, mida need kihid ruumis kujutavad. Selleks, et paremini aru saada, millist piirkonda kihid kujutavad, lisame projekti Maa- ja Ruumiameti aluskaardi.</p>
-
-    <ul>
-      <li>Vali vasakpoolsest Browser menüüst WMS/WMTS → New Connection...</li>
-      <li>Avanenud dialoogiaknas sisesta Connection Details all ühenduse nimi (Name), mille võid ise valida. Näiteks "Maa- ja Ruumiameti aluskaart"</li>
-      <li>Lahtrisse URL kopeeri kaardi aadress: http://kaart.maaamet.ee/wms/fotokaart</li>
-      <li>Muud parameetrid võid jätta muutmata → kliki OK</li>
-      <li>WMS/WMTS ühenduste all peaksid nüüd nägema ühendust nimega Maa- ja Ruumiameti aluskaart</li>
-    </ul>
-
-    <img src="/assets/img/wms_connection.png" alt="">
-
-    <p>Me tahame aluskaardina kasutada Maa- ja Ruumiameti fotokaarti, millele on lisatud hübriidkaart asulate, teede, kohanimede jmt kujutamiseks:</p>
-
-    <ul>
-      <li>Ava eelmises sammus loodud ühendus ja leia menüüst Hübriidkaart</li>
-      <li>Kaardikihi lisamiseks lohista kiht kaardiaknasse</li>
-      <li>Leia menüüst kiht Ortofot ja lohista samuti kaardiaknasse</li>
-    </ul>
-
-    <p>Nüüd näed kaardiaknas lisatud aluskaarte, aga kihid kuvatakse kaardil vaikimis selles järjekorras, nagu need lisati. See on justkui võileiva valmistamine: kui lisad kõigepealt või, siis vorsti ja juustu, näed võileival ainult pealmist juustukihti, aga muud komponendid on seal all endiselt olemas. Pindmine ortofoto kiht katab kogu Eestit, seega ei paista selle alt midagi välja. Teiste kihtide nägemiseks tuleb meil lihtsalt kihtide järjekorda muuta.</p>
-
-    <ul>
-      <li>Muuda vasakpoolses kihihalduri (Layers) menüüs kihtide järjekorda neid üles-alla lohistades</li>
-      <li>Kõige pealmine (nimekirjas ülemine) võiks olla jõgede kiht (vooluveekogud)</li>
-      <li>Järgmisena võiks kuvada Tartu_dtm kihi ja siis hübriidkaardi</li>
-      <li>Kõige alumine peaks olema kiht Ortofoto</li>
-    </ul>
-
-    <p>Pärast järjekorra muutmist peaks kaardipilt paistma sarnane sellega, mis on näha allpool. Ortofoto peal on näha maanteid ja kohanimesid, nende peal on must-valge Tartu_dtm kiht ja kõige peal Tartu piirkonna vooluveekogude kiht.</p>
-
-    <img src="/assets/img/kihihaldur.png" alt="">
-
-    <h3>Üleujutuse modelleerimine</h3>
-
-    <p>Tutvu kaardipildiga, siin näed Tartu piirkonna digitaalset maastikumudelit (ingl. k. Digital Terrain Model ehk DTM). Vali esmalt kiht Tartu_dtm (klikk kihtide menüüs kihi nimel), seejärel vali tööriistaribalt tööriist "Identify features" ja kliki kaardil. Tulemuste aknas peaksid nägema, et Band 1 näitab valitud asukoha kõrgust merepinnast. Antud rastri kiht on 5m resolutsiooniga ehk ühe piksli suurus on 5x5m, kõrgus on arvutatud ala keskmine.</p>
+      <div class="acc2__panel" id="panel-1" hidden>
+        <p>Selles töötoas modelleerime kaardil Emajõe veetaseme tõusuga kaasnevaid üleujutusi. Emajõe veetase on pidevas muutumises, suuremaid üleujutusi näeb enamasti kevadel. 2025. aastal oli suurem üleujutus veebruaris-märtsis, kui Ihaste luht Emajõe idapoolsel kaldal oli täielikult üle ujutatud, jäätus ja leidis kohalike poolt kasutust uisuplatsina.</p>
     
-    <ul>
-      <li>Proovi jõuda arusaamisele, millised piirkonnad kaardil on madalamad ja millised kõrgemad!</li>
-    </ul>
-
-    <img src="/assets/img/toolbar.png" alt="">
-    <p style="padding-left: 10%; font-weight: 600;">Tööriista "Identify features" asukoht tööriistaribal.</p>
-
-    <p>Aktiveeri kaardil vooluveekogude kiht. Kui see ei ilmu kohe maastikumudeli kihi peal nähtavale, siis veendu, et vasakpoolses kihihalduris oleks vooluveekogude kiht kaardil kõrgemal kui Tartu_dtm kiht. Kihtide järjekorda saad muuta lohistades.</p>
+        <p>Üleujutuste põhjuseid on mitmeid, mis koosmõjus üksteist võimendavad. Lumerohke talv suure veevaruga lumes annab sulades suure potentsiaali veetaseme tõusuks. Sügavalt läbi külmunud maapind ei võta vett vastu, seega liigub vesi jõge mööda Peipsi suunas. Veetase sõltub veel Peipsi järve veetasemest ja jääoludest: kui veetase on kõrge ja sissevool takistatud, paisub jõgi aina enam üle kallaste.</p>
     
-    <p>Kui jõe kiht on digitaalse maastikumudeli kihi peal näha, siis proovi jõe aladel klikkides leida, milline on jõe kõrgus merepinnast. See peaks jääma alla 32 meetri. Nüüd, kui meil on jõe pinna kõrgus enam-vähem teada, võime alustada üleujutuse modelleerimisega.</p>
+        <img src="/assets/img/supilinn_20_saj.png" alt="">
+        <p style="font-weight: 600;">Sagedane olukord Tartus, Supilinnas 20. sajandi alguses</p>
+      </div>
+    </div>
 
-    <ul>
-      <li>Ava tööriist "Raster calculator" (tööriistaribalt Raster → Raster calculator…)</li>
-    </ul>
+    <!-- Töökeskkonna ettevalmistamine -->
+    <div class="acc2">
+      <button class="acc2__title" type="button" aria-expanded="false" aria-controls="panel-2">
+        1. Töökeskkonna ettevalmistamine
+      </button>
+
+      <div class="acc2__panel" id="panel-2" hidden>
+        <p>Modelleerimiseks kasutame tarkvara QGIS, mis võimaldab meil ruumiandmeid töödelda. Töökeskkonna ettevalmistamiseks tee läbi järgmised sammud:</p>
+
+        <ul>
+          <li>Ava arvutis tarkvara QGIS</li>
+          <li>Loo uus projekt: kliki "New Empty Project" või tööriistaribalt Project → New</li>
+          <li>Salvesta projekt arvutis sellisesse kausta, kust selle hiljem üles leiaksid. Näiteks Documents või Desktop. Project → Save As... → vali failile sobiv nimi ja kaust → Save</li>
+          <li>Lae arvutisse alla andmed <a href="/assets/downloads/andmed.zip" download>siit lingilt</a></li>
+          <li>Ava kaust, kuhu andmed alla laadisid ja lohista kaust andmed.zip QGIS-i aknasse, et et andmed kuvada</li>
+          <li>Avanenud aknas näed, milliseid kihte lisada. Kaks kihti on juba valitud, seega kliki Add Layers</li>
+        </ul>
+
+        <p>Pärast kihtide lisamist peaks QGIS-is näha olema sarnane vaade:</p>
+        <img src="/assets/img/QGIS_andmed_valmis.png">
+      </div>
+    </div>
+
+    <!-- Aluskaardi lisamine -->
+    <div class="acc2">
+      <button class="acc2__title" type="button" aria-expanded="false" aria-controls="panel-3">
+        2. Aluskaardi lisamine
+      </button>
+
+      <div class="acc2__panel" id="panel-3" hidden>
+        <p>Andmed on küll edukalt lisatud, kuid puudub kontekst: me näeme kaardil mingeid kihte, aga me ei tea, mida need kihid ruumis kujutavad. Selleks, et paremini aru saada, millist piirkonda kihid kujutavad, lisame projekti Maa- ja Ruumiameti aluskaardi.</p>
     
+        <ul>
+          <li>Vali vasakpoolsest Browser menüüst WMS/WMTS → New Connection...</li>
+          <li>Avanenud dialoogiaknas sisesta Connection Details all ühenduse nimi (Name), mille võid ise valida. Näiteks "Maa- ja Ruumiameti aluskaart"</li>
+          <li>Lahtrisse URL kopeeri kaardi aadress: http://kaart.maaamet.ee/wms/fotokaart</li>
+          <li>Muud parameetrid võid jätta muutmata → kliki OK</li>
+          <li>WMS/WMTS ühenduste all peaksid nüüd nägema ühendust nimega Maa- ja Ruumiameti aluskaart</li>
+        </ul>
     
-    <img src="/assets/img/ava_raster_calculator.png" alt="">
-    <p style="padding-left: 10%; font-weight: 600;">Tööriista "Raster calculator" avamine.</p>
+        <img src="/assets/img/wms_connection.png" alt="">
+    
+        <p>Me tahame aluskaardina kasutada Maa- ja Ruumiameti fotokaarti, millele on lisatud hübriidkaart asulate, teede, kohanimede jmt kujutamiseks:</p>
+    
+        <ul>
+          <li>Ava eelmises sammus loodud ühendus (klikk ühenduse nimel) ja leia menüüst Hübriidkaart</li>
+          <li>Kaardikihi lisamiseks lohista kiht kaardiaknasse</li>
+          <li>Leia menüüst kiht Ortofoto ja lohista samuti kaardiaknasse</li>
+        </ul>
+    
+        <p>Nüüd näed kaardiaknas lisatud aluskaarte, aga kihid kuvatakse kaardil vaikimis selles järjekorras, nagu need lisati. See on justkui võileiva valmistamine: kui lisad kõigepealt või, siis vorsti ja juustu, näed võileival ainult pealmist juustukihti, aga muud komponendid on seal all endiselt olemas. Pindmine ortofoto kiht katab kogu Eestit, seega ei paista selle alt midagi välja. Teiste kihtide nägemiseks tuleb meil lihtsalt kihtide järjekorda muuta.</p>
+    
+        <ul>
+          <li>Muuda vasakpoolses kihihalduri (Layers) menüüs kihtide järjekorda neid üles-alla lohistades</li>
+          <li>Kõige pealmine (nimekirjas ülemine) võiks olla jõgede kiht (vooluveekogud)</li>
+          <li>Järgmisena võiks kuvada Tartu_dtm kihi ja siis hübriidkaardi</li>
+          <li>Kõige alumine peaks olema kiht Ortofoto</li>
+        </ul>
+    
+        <p>Pärast järjekorra muutmist peaks kaardipilt paistma sarnane sellega, mis on näha allpool. Ortofoto peal on näha maanteid ja kohanimesid, nende peal on must-valge Tartu_dtm kiht ja kõige peal Tartu piirkonna vooluveekogude kiht.</p>
+    
+        <img src="/assets/img/kihihaldur.png" alt="">
+      </div>
+    </div>
 
-    <p>Me teame, et jõe pinna kõrgus on umbes 31.5m ümber, siis võime proovida, mis juhtuks, kui veetase tõuseks 50cm võrra ehk 32m juurde. Selleks teeme Raster calculatoris järgmised tegevused:</p>
+    <!-- Üleujutuse modelleerimine -->
+    <div class="acc2">
+      <button class="acc2__title" type="button" aria-expanded="false" aria-controls="panel-4">
+        3. Üleujutuse modelleerimine
+      </button>
 
-    <ul>
-      <li>Vali kasutatavaks kihiks Tartu_dtm@1 (topeltklikk kihil)</li>
-      <li>Operaatoriks sobib <, sest me soovime valida välja kõik pikslid, mis on madalama väärtusega kui 32.</li>
-      <li>Kirjuta valemikasti lisaks number 32, tulemus peaks olema "Tartu_dtm.tif@1" < 32. Nii valime välja pikslid, mille väärtus on väiksem kui 32</li>
-      <li>Salvesta kiht nimega uputus_32m.tif (kliki nupul ...) Kihtide salvestamisel kasuta alati sisukaid nimesid, et teaksid hiljem, millist infot mingi kiht endas kannab</li>
-      <li>Output CRS: veendu, et oleks valitud EPSG:3301 – Estonian Coordinate System of 1997</li>
-      <li>Kliki OK</li>
-    </ul>
+      <div class="acc2__panel" id="panel-4" hidden>
+        <p>Tutvu kaardipildiga, siin näed Tartu piirkonna digitaalset maastikumudelit (ingl. k. Digital Terrain Model ehk DTM). Vali esmalt kiht Tartu_dtm (klikk kihtide menüüs kihi nimel), seejärel vali tööriistaribalt tööriist "Identify features" ja kliki kaardil. Tulemuste aknas peaksid nägema, et Band 1 näitab valitud asukoha kõrgust merepinnast. Antud rastri kiht on 5m resolutsiooniga ehk ühe piksli suurus on 5x5m, kõrgus on arvutatud ala keskmine.</p>
+        
+        <ul>
+          <li>Proovi jõuda arusaamisele, millised piirkonnad kaardil on madalamad ja millised kõrgemad!</li>
+        </ul>
+    
+        <img src="/assets/img/toolbar.png" alt="">
+        <p style="padding-left: 10%; font-weight: 600;">Tööriista "Identify features" asukoht tööriistaribal.</p>
+    
+        <p>Aktiveeri kaardil vooluveekogude kiht. Kui see ei ilmu kohe maastikumudeli kihi peal nähtavale, siis veendu, et vasakpoolses kihihalduris oleks vooluveekogude kiht kaardil kõrgemal kui Tartu_dtm kiht. Kihtide järjekorda saad muuta lohistades.</p>
+        
+        <p>Kui jõe kiht on digitaalse maastikumudeli kihi peal näha, siis proovi jõe aladel klikkides leida, milline on jõe kõrgus merepinnast. See peaks jääma alla 32 meetri. Nüüd, kui meil on jõe pinna kõrgus enam-vähem teada, võime alustada üleujutuse modelleerimisega.</p>
+    
+        <ul>
+          <li>Ava tööriist "Raster calculator" (tööriistaribalt Raster → Raster calculator…)</li>
+        </ul>
+        
+        
+        <img src="/assets/img/ava_raster_calculator.png" alt="">
+        <p style="padding-left: 10%; font-weight: 600;">Tööriista "Raster calculator" avamine.</p>
+    
+        <p>Me teame, et jõe pinna kõrgus on umbes 31.5m ümber, siis võime proovida, mis juhtuks, kui veetase tõuseks 50cm võrra ehk 32m juurde. Selleks teeme Raster calculatoris järgmised tegevused:</p>
+    
+        <ul>
+          <li>Vali kasutatavaks kihiks Tartu_dtm@1 (topeltklikk kihil)</li>
+          <li>Operaatoriks sobib <, sest me soovime valida välja kõik pikslid, mis on madalama väärtusega kui 32.</li>
+          <li>Kirjuta valemikasti lisaks number 32, tulemus peaks olema "Tartu_dtm.tif@1" < 32. Nii valime välja pikslid, mille väärtus on väiksem kui 32</li>
+          <li>Salvesta kiht nimega uputus_32m.tif (kliki nupul ...) Kihtide salvestamisel kasuta alati sisukaid nimesid, et teaksid hiljem, millist infot mingi kiht endas kannab</li>
+          <li>Output CRS: veendu, et oleks valitud EPSG:3301 – Estonian Coordinate System of 1997</li>
+          <li>Kliki OK</li>
+        </ul>
+    
+        <img src="/assets/img/raster_calculator.png" alt="">
+    
+        <p>Kaardile peaksid ilmuma need alad, mis jäävad 32 meetrist allapoole. Sellised pikslid on tähistatud väärtusega 1 (valge värv) ja pikslid, mis jäävad sellest piirist kõrgemale, on tähistatud väärtusega 0. </p>
+      </div>
+    </div>
 
-    <img src="/assets/img/raster_calculator.png" alt="">
+    <!-- Üleujutuse kihi stiili kujundamine -->
+    <div class="acc2">
+      <button class="acc2__title" type="button" aria-expanded="false" aria-controls="panel-5">
+        4. Üleujutuse kihi stiili kujundamine
+      </button>
 
-    <p>Kaardile peaksid ilmuma need alad mis jäävad 32 meetrist allapoole. Sellised pikslid on tähistatud väärtused 1 (valge värv) ja pikslid, mis jäävad sellest piirist kõrgemale, on tähistatud väärtusega 0. </p>
+      <div class="acc2__panel" id="panel-5" hidden>
+        <p>Vaikimisi on loodud üleujutuse kiht must-valge, mis tähendab, et lisaks üleujutuse alale on näha ka must (üleujutamata ala), mis meile kihina tegelikult huvi ei paku. Muudame kihi stiili nii, et üleujutatud ala oleks sinine, ülejäänud ala aga läbipaistev. Selleks teeme järgmised toimingud:</p>
+    
+        <ul>
+          <li>Kihihalduris parem klikk kihil uputus_32m → Properties → Symbology.</li>
+          <li>Render type → valime Singleband pseudocolor.</li>
+          <li>Topeltklikk kastil väärtuse 0 kõrval, et värvi muuta. Neid alasid me näha ei taha (soovitud tingimus pole täidetud), seega peidame need valides värvi läbipaistmatuseks (Opacity) väärtuse 0%</li>
+          <li>Samamoodi klikime väärtuse 1 värvikastil ja muudame värvi siniseks, muudame taas läbipaistmatuse väärtust (Opacity) ja seame selle 50% peale, et läbi kihi oleks aluskaarti näha</li>
+          <li>Soovid korral katseta erinevaid värvitoone, et näha, milline värv paremini sobib. Kaardil näevad ilusamad välja pastelsemad ja mitte väga erksad toonid.</li>
+          <li>Ok/Apply</li>
+        </ul>
+    
+        <img src="/assets/img/color_settings.png" alt="">
+        <p style="font-weight: 600;">Kihi värvi muutmiseks vali kujunduse tüüp (render type), tee topeltklikk värvil, mida soovid muuta ja seadista värvi parameetrid enda äranägemise järgi.</p>
+    
+        <div style="display: flex; flex-direction: row; padding-left: 4%; padding-top: 16px;">
+          <div style="width: 60%;">
+            <p style="margin-top: 0px;">Üleujutuse kihi stiil on nüüd muudetud ja kui esialgne kõrgusmudeli kiht välja lülitada (kihihalduris linnuke välja kihi Tartu_dtm eest), siis on taustakaardiga näha, millised alad oleksid seatud tingimustel üle ujutatud →</p>
+        
+            <p>Kui soovid proovida mõnda kõrgemat või madalamat üleujutuse taset, siis korda Raster calculatoriga arvutust enda parameetritega. Uus kiht tekib taas must-valge kujundusega, aga juba olemasoleva kujunduse saab kergelt kopeerida:</p>
+        
+            <ul>
+              <li>Parem klikk kihil uputus_32m → Styles → Copy Style → All Style Categories</li>
+              <li>Ja kasuta stiili: parem klikk uuel kihil → Styles → Paste Style → All Style Categories</li>
+            </ul>
+          </div>
+      
+          <div style="height: 300px;">
+            <img src="/assets/img/uuendatud_stiil.png" style="width: 100%; height: 100%; object-fit: contain; padding-left: 0px;" alt="">
+          </div>
+        </div>
+      </div>
+    </div>
 
-    <h3>Üleujutuse kihi stiili kujundamine</h3>
+    <!-- Rasterkihi vektoriks muutmine -->
+    <div class="acc2">
+      <button class="acc2__title" type="button" aria-expanded="false" aria-controls="panel-6">
+        5. Rasterkihi vektoriks muutmine
+      </button>
 
-    <p>Vaikimisi on loodud üleujutuse kiht must-valge, mis tähendab, et lisaks üleujutuse alale on näha ka must (üleujutamata ala), mis meile kihina tegelikult huvi ei paku. Muudame kihi stiili nii, et üleujutatud ala oleks sinine, ülejäänud ala aga läbipaistev. Selleks teeme järgmised toimingud:</p>
+      <div class="acc2__panel" id="panel-6" hidden>
+        <p>Kaugemalt vaadates näeb meie loodud kiht juba hea välja, aga lähemale suumides on aru saada, et tegemist on rasterkihiga. Iseenesest pole rasterandmete kasutamises mitte midagi halba, aga lõplike tulemuste kaardil kujutamiseks sobiks paremini vektorandmete kasutamine, mis võimaldab meil rastri "nurgelisust" siluda ja kujutada üleujutuse nähtust veidi loomulikumalt.</p>
+    
+        <p>Esimese sammuna muudame rasterkihi vektorkihiks:</p>
+    
+        <ul>
+          <li>Vali ülemiselt tööriistaribalt Raster → Conversion → Polygonize (Raster to vector)</li>
+          <li>Sisendkihiks (Input layer) vali enda loodud üleujutuse kiht (nt uputus_32m)</li>
+          <li>Sektsiooni "Vectorized" all kliki nupul "..." ja salvesta kiht nimega "uputus_vektor" enda töökausta</li>
+          <li>Faili tüübiks jäta GPKG</li>
+          <li>Kliki "Run"</li>
+          <li>Kui protsess on lõpetatud, võid akna sulgeda</li>
+        </ul>
+    
+        <img src="/assets/img/raster_to_vector.png" alt="">
+    
+        <p>Tulemusena näed midagi sarnast:</p>
+    
+        <img src="/assets/img/raster_to_vector_tulemus.png" alt="">
+    
+        <p>Rasterkiht on edukalt vektorkihiks muudetud, aga tulemustesse on kaasatud ka alad, mis pole üleujutatud. Eraldame loodud kihist üleujutatud alad.</p>
+    
+        <ul>
+          <li>Parem klikk kihi uputus_vektor → Open Attribute Table</li>
+          <li>Vali avanenud akna tööriistaribalt tööriist "Select features using an expression"</li>
+          <li>Avanenud aknasse kirjuta "DN" = 1</li>
+          <li>Kliki "Select features", seejärel "Close"</li>
+          <li>Uuesti parem klikk kihil uputus_vektor → Export → Save Selected Features As...</li>
+          <li>Avanenud salvestamise aknas vali kihi nimeks uputus_vektor_puhas → OK/Save</li>
+        </ul>
+        
+        <img src="/assets/img/vector_eraldatud.png" alt="">
+    
+        <p>Üleujutatud alad on küll eraldatud, kuid tulemus on endiselt väga sakiline, sellist olukorda looduses ei tekiks. Lihtsustame loodud vektorkihti, et sakilisust vähendada, kasutades tööriista Simplify:</p>
+    
+        <ul>
+          <li>Vali ülemiselt tööriistaribalt Vector → Geometry Tools → Simplify</li>
+          <li>Input layer: vali uputus_vektor_puhas</li>
+          <li>Tolerance: 5</li>
+          <li>Kliki nupul "..." ja salvesta kiht enda töökausta nimega uputus_lihtsustatud</li>
+          <li>Run</li>
+        </ul>
+    
+        <p>Nagu näha, on lihtsustatud kiht küll vähem sakiline, aga siiski väga teravate nurkadega, mis jätab looduslikku nähtust kujutaval kaardil vale mulje. Nurgelisusest vabanemiseks kasutame tööriista Smooth:</p>
+    
+        <ul>
+          <li>Veendu, kas sul on QGIS-i akna paremas servas avatud Processing Toolbox. Kui ei, saad selle avada ülemiselt tööriistaribalt Processing → Toolbox</li>
+          <li>Kirjuta otsingusse Smooth → Ava tööriist Smooth (peaks asuma sektsiooni Vector geometry)</li>
+          <li>Avanenud aknas vali Input layer: uputus_lihtsustatud</li>
+          <li>Iterations: 5</li>
+          <li>Smoothed: kliki nupul "..." ja salvesta kiht enda töökausta nimega uputus_silutud</li>
+          <li>Run</li>
+        </ul>
+    
+        <p>Olemegi saanud üleujutuse kihi, mis näeb välja loomulik ja võiks looduses esineda:</p>
+        
+        <img src="/assets/img/uputus_silutud.png" alt="">
+      </div>
+    </div>
 
-    <ul>
-      <li>Kihihalduris parem klikk kihil uputus_32m → Properties → Symbology.</li>
-      <li>Render type → valime Singleband pseudocolor.</li>
-      <li>Klikime musta värvi kastil väärtuse 1.0000 kõrval, et värvi muuta. Musta värvi alasid me näha ei taha, seega peidame need valides värvis läbipaistmatuseks (Opacity) väärtuse 0%</li>
-      <li>Samamoodi klikime väärtuse 0 värvikastil ja muudame värvi siniseks, muudame taas läbipaistmatuse väärtust (Opacity) ja seame selle 50% peale, et läbi kihi oleks aluskaarti näha</li>
-      <li>Ok/Apply</li>
-    </ul>
+    <!-- Üleujutuse kihi avaldamine veebikaardil -->
+    <div class="acc2">
+      <button class="acc2__title" type="button" aria-expanded="false" aria-controls="panel-7">
+        6. Üleujutuse kihi avaldamine veebikaardil
+      </button>
 
-    <p>Üleujutuse kihi stiil on nüüd muudetud ja kui esialgne kõrgusmudeli kiht välja lülitada (kihihalduris linnuke välja kihi Tartu_dtm eest), siis on taustakaardiga näha, millised alad oleksid seatud tingimustel üle ujutatud.</p>
+      <div class="acc2__panel" id="panel-7" hidden>
+        <p>Tegime läbi mitmeid protseduure, et luua Tartu üleujutuste kiht, aga oma tööd oleks tore võimalusel ka teistele näidata. Selleks lisame loodud kihi veebikaardirakendusse, mis on eelnevalt ette valmistatud. Viimase sammuna ekspordime enda kihi GEOJSON vormingus, et seda lihtsasti veebikaardile lisada:</p>
+    
+        <ul>
+          <li>Parem klikk kihil uputus_silutud → Export → Save Features As...</li>
+          <li>Format: GeoJSON</li>
+          <li>File name: kliki nupul "..." ja salvesta enda töökausta meelepärase nimega. Jäta meelde, kuhu see salvestatakse, et suudaksid selle hiljem üles leida.</li>
+          <li>CRS: vali EPSG:4326 - WGS 84</li>
+          <li>Ok</li>
+        </ul>
+    
+        <p>Kui oled oma kihi GEOJSON formaadis salvestanud, lae see üles <a href="https://tartuulikool-my.sharepoint.com/:f:/g/personal/ats989_ut_ee/IgAhMMMmZuM4RZg2k5GDpIk-Adz8V1WgKzMZtDP3AfPN7K4?e=CHDmbY" target="_blank">siia kausta</a>. Seejärel avaldab töötoa juhendaja kihi veebikaardil, mida saad vaadata <a href="/TartuFlood/map.html" target="_blank">siit</a>.</p>
+      </div>
+    </div>
 
-    <p>Kui soovid proovida mõnda kõrgemat või madalamat üleujutuse taset, siis korda Raster calculatoriga arvutust enda parameetritega. Uus kiht tekib taas must-valge kujundusega, aga juba olemasoleva kujunduse saab kergelt kopeerida:</p>
+    <!-- Kasutatud materjalid -->
+    <div class="acc2">
+      <button class="acc2__title" type="button" aria-expanded="false" aria-controls="panel-8">
+        Kasutatud materjalid
+      </button>
 
-    <ul>
-      <li>Parem klikk kihil uputus_32m → Styles → Copy Style → All Style Categories</li>
-      <li>Ja kasuta stiili: parem klikk uuel kihil → Styles → Paste Style → All Style Categories</li>
-    </ul>
+      <div class="acc2__panel" id="panel-8" hidden>
+        <ul style="padding-bottom: 40px;">
+          <li>Suurveed Emajõel, E. Randpuu, 2012. <a href="https://keskkonnaportaal.ee/sites/default/files/2021-12/ilm%20ja%20kliima/Randpuu2012.pdf" target="_blank">https://keskkonnaportaal.ee/sites/default/files/2021-12/ilm%20ja%20kliima/Randpuu2012.pdf</a></li>
+          <li>Maa- ja Ruumiameti hübriidkaart. <a href="https://geoportaal.maaamet.ee/est/ruumiandmed/topokaardid-ja-aluskaardid/hubriidkaart-p296.html" target="_blank">https://geoportaal.maaamet.ee/est/ruumiandmed/topokaardid-ja-aluskaardid/hubriidkaart-p296.html</a></li>
+        </ul>
+      </div>
+    </div>
 
-    <h3>Kasutatud materjalid:</h3>
-    <ul>
-      <li>Suurveed Emajõel, E. Randpuu, 2012. <a href="https://keskkonnaportaal.ee/sites/default/files/2021-12/ilm%20ja%20kliima/Randpuu2012.pdf" target="_blank">https://keskkonnaportaal.ee/sites/default/files/2021-12/ilm%20ja%20kliima/Randpuu2012.pdf</a></li>
-      <li>Maa- ja Ruumiameti hübriidkaart. <a href="https://geoportaal.maaamet.ee/est/ruumiandmed/topokaardid-ja-aluskaardid/hubriidkaart-p296.html" target="_blank">https://geoportaal.maaamet.ee/est/ruumiandmed/topokaardid-ja-aluskaardid/hubriidkaart-p296.html</a></li>
-    </ul>
   </div>
 
   <div style="width: 20vw; height: 100vh; background-color: rgb(252, 252, 252);"></div>
 </body>
+
+<script>
+  document.addEventListener("click", (e) => {
+    const btn = e.target.closest(".acc2__title");
+    if (!btn) return;
+
+    const panelId = btn.getAttribute("aria-controls");
+    const panel = document.getElementById(panelId);
+    const isOpen = btn.getAttribute("aria-expanded") === "true";
+
+    btn.setAttribute("aria-expanded", String(!isOpen));
+    panel.hidden = isOpen;
+  });
+</script>
