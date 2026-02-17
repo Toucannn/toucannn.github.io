@@ -3,7 +3,7 @@
   href="/TartuSuurvesi/style.css"
 />
 <body style="display: flex; flex-direction: row; margin: 0; height: 100%; overflow: hidden;">
-  <div style="width: 20vw; height: 100%; display: flex; flex-direction: column;">
+  <div class="columnContainer" style="width: 20vw; height: 100%; display: flex; flex-direction: column;">
 
     <a class="acc2 acc2--link" style="margin-top: 81px;" href="/TartuSuurvesi/map.html" target="_blank">
       <span class="acc2__title sidelineBtn">Kaardi vaade</span>
@@ -19,7 +19,7 @@
 
   </div>
 
-  <div class="middleColumn">
+  <div class="middleColumn columnContainer">
     <h1 style="color: rgb(233, 239, 241); text-shadow: 2px 2px 4px black;">Emajõe üleujutuse modelleerimine Tartus</h1>
 
     <!-- Sissejuhatus -->
@@ -294,9 +294,10 @@
 
   </div>
 
-  <div style="width: 20vw; height: 100%;">
-    <div style="color: white; text-shadow: 2px 2px 4px black; position: absolute; bottom: 10px; right: 10px;">
-      Taustafoto: <a style="color: white;" href="https://www.flickr.com/people/37583176@N00" target="_blank">Ninara</a>
+  <div class="" style="width: 20vw; height: 100%;">
+    <div id="taustafotoHover" style="color: white; text-shadow: 2px 2px 4px black; position: absolute; bottom: 10px; right: 10px;">
+      <span>Taustafoto:</span>
+      <a style="color: white;" href="https://www.flickr.com/people/37583176@N00" target="_blank">Ninara</a>
     </div>
   </div>
 </body>
@@ -312,5 +313,25 @@
 
     btn.setAttribute("aria-expanded", String(!isOpen));
     panel.hidden = isOpen;
+  });
+
+  const hoverTarget = document.getElementById("taustafotoHover");
+  const columns = document.querySelectorAll(".columnContainer");
+
+  let timer = null;
+  const delayMs = 150; // small timeout before fading
+
+  function setFaded(on) {
+    columns.forEach(el => el.classList.toggle("is-faded", on));
+  }
+
+  hoverTarget.addEventListener("mouseenter", () => {
+    clearTimeout(timer);
+    timer = setTimeout(() => setFaded(true), delayMs);
+  });
+
+  hoverTarget.addEventListener("mouseleave", () => {
+    clearTimeout(timer);
+    setFaded(false);
   });
 </script>
