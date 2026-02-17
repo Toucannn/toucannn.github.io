@@ -1,22 +1,41 @@
-<link
-  rel="stylesheet"
-  href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
-/>
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
+<link rel="stylesheet" href="/TartuSuurvesi/style.css"/>
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 
 <body style="margin: 0;">
+  <div id="loading" class="loading hidden" role="status" aria-live="polite">
+    Kihtide laadimine…
+  </div>
+
   <div id="map" style="height: 100vh;"></div>
   <script>
-    const map = L.map('map').setView([58.378, 26.729], 12);
+    const map = L.map('map').setView([58.368, 26.729], 12);
     const osm = L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
       maxZoom: 19,
       attribution: '© OpenStreetMap'
+    })
+    const maaamet = L.tileLayer('https://tiles.maaamet.ee/tm/tms/1.0.0/foto@GMC/{z}/{x}/{y}.png', {
+      tms: true,
+      maxZoom: 20,
+      attribution: '© Maaamet'
     }).addTo(map);
   
     
     // Layers control containers
-    const baseLayers = { 'OpenStreetMap': osm };
-    let overlays = {};
+    const baseLayers = {
+      'Maa- ja ruumiamet': maaamet,
+      'OpenStreetMap': osm,
+    };
+
+    const hybrid_map = L.tileLayer('https://tiles.maaamet.ee/tm/tms/1.0.0/hybriid@GMC/{z}/{x}/{y}.png', {
+      tms: true,
+      maxZoom: 20,
+      attribution: '© Maaamet'
+    }).addTo(map);
+
+    let overlays = {
+      'Hübriidkaart': hybrid_map
+    };
     // const layersControl = L.control.layers(baseLayers, overlays, { collapsed: false }).addTo(map); // Leaflet layers control [3](https://leafletjs.com/examples/layers-control/)
   
   
@@ -49,22 +68,40 @@
         const geojson = await (await fetch(file.download_url)).json();
         const layer = L.geoJSON(geojson)
         overlays[layerName] = layer;
-        layer.addTo(map);
+        // layer.addTo(map);
       }
     }
   
-    loadAllLayers().catch(console.error).then(() => {
-      console.log("overlays", overlays)
-      const layersControl = L.control.layers(baseLayers, overlays, { collapsed: false }).addTo(map); // Leaflet layers control [3](https://leafletjs.com/examples/layers-control/)
-    })
-    console.log("adding layer control")
-    let testobj = {}
-    console.log("testobj", testobj)
-    testobj["test-a"] = "test1"
-    testobj["test-b"] = "test2"
-    console.log("testobj", testobj)
-  
-    console.log("overlays", overlays)
+    // loadAllLayers().catch(console.error).then(() => {
+    //   console.log("overlays", overlays)
+    //   const layersControl = L.control.layers(baseLayers, overlays, { collapsed: false }).addTo(map); // Leaflet layers control [3](https://leafletjs.com/examples/layers-control/)
+    // })
+
+    const loadingEl = document.getElementById("loading");
+
+    function setLoading(isLoading, text = "Kihtide laadimine…") {
+      loadingEl.textContent = text;
+      loadingEl.classList.toggle("hidden", !isLoading);
+    }
+
+    async function run() {
+      setLoading(true);
+      try {
+        await loadAllLayers().catch(console.error).then(() => {
+          console.log("overlays", overlays)
+          const layersControl = L.control.layers(baseLayers, overlays, { collapsed: false }).addTo(map);
+        })
+      } catch (err) {
+        console.error(err);
+        setLoading(true, "Kihtide laadimine ebaõnnestus (vaata konsooli).");
+        setTimeout(() => setLoading(false), 2000);
+        return
+      } finally {
+        setLoading(false);
+      }
+    }
+
+    run();
   
   </script>
 </body>

@@ -61,7 +61,7 @@ img {
 
 body {
   height: 100%;
-  background-image: url("/assets/img/emajogi_resized.jpg");
+  background-image: url("/assets/img/emajogi_lq.jpg");
   /* background-image: url("https://upload.wikimedia.org/wikipedia/commons/d/d7/Tartu%2C_Estonia_%2854190669177%29.jpg"); */
   background-size: cover;          
   background-position: center;    
@@ -79,4 +79,40 @@ body {
 
 .middleColumn::-webkit-scrollbar {
   display: none;
+}
+
+.acc2--link {
+  display: block;
+  text-decoration: none;
+  color: inherit;
+  margin-top: 0px;
+}
+
+.acc2--link:hover {
+  transform: scale(1.02)
+}
+
+.acc2--link .acc2__title {
+  display: block;
+  width: auto;
+  padding-top: 11px;
+  padding-bottom: 10px;
+  cursor: pointer;
+}
+
+/* Map page style */
+
+.hidden { display: none; }
+
+.loading {
+  position: fixed;
+  top: 30px;
+  left: 50%;
+  transform: translateX(-50%);
+  padding: 8px 12px;
+  border-radius: 999px;
+  background: rgba(0,0,0,0.75);
+  color: #fff;
+  font: 14px system-ui, sans-serif;
+  z-index: 9999;
 }
