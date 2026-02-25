@@ -65,7 +65,9 @@
       for (const file of files) {
         // Preferred: use the download_url (a raw URL with proper CORS for JSON)
         console.log("downloading from url:", file);
-        const layerName = file.name.replace('.geojson', '');
+        const layerName = file.name
+          .replace('.geojson', '')
+          .replaceAll('_', ' ')
         console.log("layerName", layerName)
         const geojson = await (await fetch(file.download_url)).json();
         const layer = L.geoJSON(geojson)
