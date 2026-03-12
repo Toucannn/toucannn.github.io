@@ -30,9 +30,11 @@ jobs:
 
       - name: Install
         run: npm ci
+        wroking-directory: daylength
 
       - name: Build
         run: npm run build
+        working-directory: daylength
 
       - name: Configure Pages
         uses: actions/configure-pages@v5
