@@ -2,7 +2,7 @@ name: Deploy to GitHub Pages
 
 on:
   push:
-    branches: [ "main" ]
+    branches: ["main"]
   workflow_dispatch:
 
 permissions:
@@ -17,6 +17,7 @@ concurrency:
 jobs:
   build:
     runs-on: ubuntu-latest
+
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -36,13 +37,28 @@ jobs:
         run: npm run build
         working-directory: daylength
 
+      # Prepare a Pages root folder with your app inside /daylength/
+      - name: Prepare Pages artifact
+        run: |
+          rm -rf _site
+          mkdir -p _site/daylength
+          cp -r daylength/dist/* _site/daylength/
+
+          cat > _site/index.html <<'EOF'
+          <!doctype html>
+          <meta charset="utf-8" />
+          <meta http-equiv="refresh" content="0; url=/daylength/" />
+          <title>Redirecting…</title>
+          <a href="/daylength/">Go to daylength</a>
+          EOF
+
       - name: Configure Pages
         uses: actions/configure-pages@v5
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: daylength/dist
+          path: _site
 
   deploy:
     needs: build
