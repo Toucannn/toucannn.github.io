@@ -44,14 +44,6 @@ jobs:
           mkdir -p _site/daylength
           cp -r daylength/dist/* _site/daylength/
 
-          cat > _site/index.html <<'EOF'
-          <!doctype html>
-          <meta charset="utf-8" />
-          <meta http-equiv="refresh" content="0; url=/daylength/" />
-          <title>Redirecting…</title>
-          <a href="/daylength/">Go to daylength</a>
-          EOF
-
       - name: Configure Pages
         uses: actions/configure-pages@v5
 
