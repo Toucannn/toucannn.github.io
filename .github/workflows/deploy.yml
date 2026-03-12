@@ -37,10 +37,22 @@ jobs:
         run: npm run build
         working-directory: daylength
 
-      # Prepare a Pages root folder with your app inside /daylength/
       - name: Prepare Pages artifact
         run: |
           rm -rf _site
+          mkdir -p _site
+
+          # 1) Copy existing static site structure from repo root into _site/
+          # Exclude folders you do NOT want to publish (source code, workflows, build staging)
+          rsync -av --delete \
+            --exclude '.git/' \
+            --exclude '.github/' \
+            --exclude 'daylength/' \
+            --exclude '_site/' \
+            --exclude 'node_modules/' \
+            ./ _site/
+
+          # 2) Put the built Vue app under /daylength/
           mkdir -p _site/daylength
           cp -r daylength/dist/* _site/daylength/
 
