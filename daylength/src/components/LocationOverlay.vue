@@ -7,6 +7,11 @@ function close() {
   store.clear()
 }
 
+function onDateChange(e) {
+  const newDate = new Date(e.target.value)
+  store.setDate(newDate)
+}
+
 function formatTime(date) {
   if (!date) return '--'
   // Format with local timezone (your TZ is GMT+02:00)
@@ -36,6 +41,18 @@ function formatDuration(seconds) {
       <p>Longitude: {{ store.selectedCoord.lng.toFixed(6) }}</p>
       <p>Latitude: {{ store.selectedCoord.lat.toFixed(6) }}</p>
       
+      <hr>
+      
+      <!-- date selector -->
+      <label>
+        <strong>Select date:</strong><br>
+        <input
+          type="date"
+          :value="store.selectedDate.toISOString().slice(0,10)"
+          @change="onDateChange"
+        >
+      </label>
+
       <hr>
 
       <p><strong>Sunrise:</strong> {{ formatTime(store.solarInfo?.sunrise) }}</p>

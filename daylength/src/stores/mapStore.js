@@ -4,21 +4,33 @@ import SunCalc from 'suncalc'
 
 export const mapStore = defineStore('mapStore', () => {
   const selectedCoord = ref(null)
+  const selectedDate = ref(new Date())
   const solarInfo = ref(null)
 
   function setCoord(lngLat) {
     selectedCoord.value = lngLat
-    computeSolarInfo(lngLat)
+    computeSolarInfo()
   }
   
-  function computeSolarInfo({ lng, lat }) {
-    const now = new Date()
-    const times = SunCalc.getTimes(now, lat, lng)
+  function setDate(date) {
+    selectedDate.value = date
+    computeSolarInfo()
+  }
+
+  function computeSolarInfo() {
+    if (!selectedCoord.value) {
+      solarInfo.value = null
+      return
+    }
+
+    const { lng, lat } = selectedCoord.value
+    const date = selectedDate.value
+
+    const times = SunCalc.getTimes(date, lat, lng)
 
     const sunrise = times.sunrise
     const sunset = times.sunset
-
-    let dayLengthSeconds = (sunset - sunrise) / 1000
+    const dayLengthSeconds = (sunset - sunrise) / 1000
 
     solarInfo.value = {
       sunrise,
@@ -27,10 +39,11 @@ export const mapStore = defineStore('mapStore', () => {
     }
   }
 
-
   function clear() {
     selectedCoord.value = null
+    solarInfo.value = null
+    selectedDate.value = new Date() // reset to today
   }
 
-  return { selectedCoord, solarInfo, setCoord, clear }
+  return { selectedCoord, selectedDate,solarInfo, setCoord, setDate, clear }
 })
