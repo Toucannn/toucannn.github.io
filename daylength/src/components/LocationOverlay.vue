@@ -6,6 +6,20 @@ const store = mapStore()
 function close() {
   store.clear()
 }
+
+function formatTime(date) {
+  if (!date) return '--'
+  // Format with local timezone (your TZ is GMT+02:00)
+  return date.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', second: '2-digit' })
+}
+
+function formatDuration(seconds) {
+  const h = Math.floor(seconds / 3600)
+  const m = Math.floor((seconds % 3600) / 60)
+  const s = Math.floor(seconds % 60)
+  return `${String(h).padStart(2,'0')}:${String(m).padStart(2,'0')}:${String(s).padStart(2,'0')}`
+}
+
 </script>
 
 <template>
@@ -21,6 +35,15 @@ function close() {
     <div class="content">
       <p>Longitude: {{ store.selectedCoord.lng.toFixed(6) }}</p>
       <p>Latitude: {{ store.selectedCoord.lat.toFixed(6) }}</p>
+      
+      <hr>
+
+      <p><strong>Sunrise:</strong> {{ formatTime(store.solarInfo?.sunrise) }}</p>
+      <p><strong>Sunset:</strong> {{ formatTime(store.solarInfo?.sunset) }}</p>
+      <p>
+        <strong>Day length:</strong>
+        {{ formatDuration(store.solarInfo?.dayLengthSeconds || 0) }}
+      </p>
     </div>
   </div>
 </template>
