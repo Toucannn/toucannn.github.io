@@ -1,16 +1,16 @@
 <script setup>
-import { useMapSelectionStore } from '@/stores/useMapSelectionStore'
+import { mapStore } from '@/stores/mapStore'
 
-const mapSelection = useMapSelectionStore()
+const store = mapStore()
 
 function close() {
-  mapSelection.clear()
+  store.clear()
 }
 </script>
 
 <template>
   <div 
-    v-if="mapSelection.selectedCoord"
+    v-if="store.selectedCoord"
     class="location-overlay"
   >
     <div class="header">
@@ -19,8 +19,8 @@ function close() {
     </div>
 
     <div class="content">
-      <p>Longitude: {{ mapSelection.selectedCoord.lng.toFixed(6) }}</p>
-      <p>Latitude: {{ mapSelection.selectedCoord.lat.toFixed(6) }}</p>
+      <p>Longitude: {{ store.selectedCoord.lng.toFixed(6) }}</p>
+      <p>Latitude: {{ store.selectedCoord.lat.toFixed(6) }}</p>
     </div>
   </div>
 </template>

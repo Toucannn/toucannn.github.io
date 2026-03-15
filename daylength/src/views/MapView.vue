@@ -4,10 +4,10 @@ import maplibregl from 'maplibre-gl'
 import 'maplibre-gl/dist/maplibre-gl.css'
 import LocationOverlay from '@/components/LocationOverlay.vue'
 import { GlobeToggleControl } from '../js/GlobeToggleControl.js'
-import { useMapSelectionStore } from '@/stores/useMapSelectionStore'
+import { mapStore } from '@/stores/mapStore.js'
 
 const mapContainer = ref(null)
-const mapSelection = useMapSelectionStore()
+const store = mapStore()
 let map
 let markerEl = null
 
@@ -36,7 +36,7 @@ onMounted(() => {
     const { lng, lat } = e.lngLat
 
     // Save selection to store
-    mapSelection.setCoord({ lng, lat })
+    store.setCoord({ lng, lat })
 
     updateMarkerPosition()
   })
@@ -51,9 +51,9 @@ onBeforeUnmount(() => {
 */
 
 function updateMarkerPosition() {
-  const { lng, lat } = mapSelection.selectedCoord
+  const { lng, lat } = store.selectedCoord
 
-  if (!markerEl || !mapSelection.selectedCoord ) {
+  if (!markerEl || !store.selectedCoord ) {
     markerEl = new maplibregl.Marker()
     .setLngLat([lng, lat])
     .addTo(map)

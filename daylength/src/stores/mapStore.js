@@ -1,7 +1,7 @@
 import { defineStore } from 'pinia'
 import { ref } from 'vue'
 
-export const useMapSelectionStore = defineStore('mapSelection', () => {
+export const mapStore = defineStore('mapStore', () => {
   const selectedCoord = ref(null)
 
   function setCoord(lngLat) {
